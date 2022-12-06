@@ -52,6 +52,4 @@ class RentalAPITests(TestCase):
         res = self.client.get(url)
 
         serializer = RentalSerializer(rental)
-        print('res', res.data)
-        print('serializer', serializer.data)
         self.assertEqual(res.data, serializer.data)
