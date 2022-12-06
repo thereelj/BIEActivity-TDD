@@ -32,9 +32,7 @@ class RentalAPITests(TestCase):
 
         res = self.client.get(RENTAL_URL)
 
-        rentals = Rental.objects.all().order_by('-id')
-        serializer = RentalSerializer(rentals, mane=True)
-        print(res.data)
-        print(serializer.data)
+        rentals = Rental.objects.all().order_by('id')
+        serializer = RentalSerializer(rentals, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
