@@ -55,7 +55,6 @@ class ReservationAPIView(ListCreateAPIView):
 
     def get_queryset(self):
         return Reservation.objects.all().order_by('-reservation_id')
-        # return Reservation.objects.filter(rental=f"rental-{self.kwargs.get('rental_id')}").order_by('-reservation_id')
 
 
 class ReservationDetailAPIView(RetrieveUpdateDestroyAPIView):

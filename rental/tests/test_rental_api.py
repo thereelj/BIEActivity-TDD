@@ -120,7 +120,5 @@ class ReservationAPITests(TestCase):
 
         url = reservation_detail_url(reservation_id)
         res = self.client.get(url)
-        print(res.data)
-        print(reservation)
         self.assertEqual(res.data, reservation)
 
