@@ -13,7 +13,7 @@ def get_previous_reservation(obj):
     reservation_id = obj.reservation_id
     rental = obj.rental
     previous_reservation = Reservation.objects.filter(reservation_id=reservation_id-1).first()
-    if not previous_reservation:
+    if previous_reservation:
         if previous_reservation.rental == rental:
             if reservation_id > 1:
                 order = reservation_id - 1

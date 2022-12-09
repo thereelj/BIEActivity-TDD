@@ -105,6 +105,9 @@ class ReservationAPITests(TestCase):
         self.assertEqual(res.data, reservation)
 
     def test_reservation_5(self):
+        psads = Reservation.objects.all()
+        for sd in psads:
+            print(sd)
         reservation_id = 5
         rental = 2
         checkin = '2022-01-11'
@@ -117,6 +120,10 @@ class ReservationAPITests(TestCase):
             'Checkout': checkout,
             'Previous Reservation, ID': previous
         }
+
         url = reservation_detail_url(rental, reservation_id)
         res = self.client.get(url)
+        print(res.data)
+        print(reservation)
         self.assertEqual(res.data, reservation)
+
