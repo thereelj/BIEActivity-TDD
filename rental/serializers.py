@@ -11,6 +11,15 @@ class RentalSerializer(serializers.ModelSerializer):
         read_only_fields = ['rental_id']
 
 
+class RentalGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rental
+        fields = '__all__'
+        read_only_fields = [
+            'rental_id', 'name'
+        ]
+
+
 class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -23,6 +32,6 @@ class ReservationGetSerializer(ReservationSerializer):
     class Meta(ReservationSerializer.Meta):
         fields = '__all__'
         read_only_fields = [
-            'reservation_id', 'rental', 'checkin', 'checkout'
+            'reservation_id', 'rental'
         ]
 

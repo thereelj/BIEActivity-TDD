@@ -1,7 +1,8 @@
 from rest_framework.generics import (
     ListCreateAPIView,
-    RetrieveUpdateDestroyAPIView,
-    CreateAPIView
+    RetrieveAPIView,
+    CreateAPIView,
+    RetrieveUpdateAPIView,
 )
 from rest_framework import status
 from rest_framework.response import Response
@@ -42,22 +43,35 @@ class RentalAPIView(ListCreateAPIView):
         return Rental.objects.all().order_by('-rental_id')
 
 
-class RentalDetailAPIView(RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers.RentalSerializer
+class RentalDetailAPIView(RetrieveAPIView):
+    serializer_class = serializers.RentalGetSerializer
     lookup_field = 'rental_id'
 
     def get_queryset(self):
         return Rental.objects.filter(rental_id=self.kwargs.get('rental_id'))
 
+    def _allowed_methods(self):
+        return ['GET']
+
 
 class ReservationAPIView(ListCreateAPIView):
     serializer_class = serializers.ReservationSerializer
 
+    def get(self, request, *args, **kwargs):
+        reservations = Reservation.objects.all()
+        reservation_list = []
+        for reservation in reservations:
+            reservation_list.append(get_response_data(reservation))
+        data = {
+            "result": reservation_list
+        }
+        return Response(data, status=status.HTTP_200_OK)
+
     def get_queryset(self):
-        return Reservation.objects.all().order_by('-reservation_id')
+        return Reservation.objects.all().order_by('reservation_id')
 
 
-class ReservationDetailAPIView(RetrieveUpdateDestroyAPIView):
+class ReservationDetailAPIView(RetrieveUpdateAPIView):
     serializer_class = serializers.ReservationGetSerializer
     lookup_field = 'reservation_id'
 
@@ -67,4 +81,3 @@ class ReservationDetailAPIView(RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Reservation.objects.filter(reservation_id=self.kwargs.get('reservation_id'))
-
