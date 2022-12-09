@@ -1,26 +1,10 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-
-from rest_framework import status
-from rest_framework.test import APIClient
 
 from core.models import (
     Rental,
     Reservation
 )
-
-from rental.serializers import (
-    RentalSerializer,
-    ReservationSerializer
-)
-
-# RENTAL_URL = reverse('rental:rental-list')
-# RESERVATION_URL = reverse('rental:reservation-list')
-
-# def rental_detail_url(rental_id):
-#     return reverse('rental:rental-detail', args=[rental_id])
-#
 
 
 def reservation_detail_url(rental, reservation_id):
@@ -34,27 +18,6 @@ def create_rental(**params):
 
 def create_reservation(**params):
     return Reservation.objects.create(**params)
-
-
-# class RentalAPITests(TestCase):
-#
-#     def test_retrieve_rentals(self):
-#         create_rental()
-#         create_rental(name='rental-2')
-#         res = self.client.get(RENTAL_URL)
-#
-#         rentals = Rental.objects.all().order_by('-id')
-#         serializer = RentalSerializer(rentals, many=True)
-#         self.assertEqual(res.status_code, status.HTTP_200_OK)
-#         self.assertEqual(res.data, serializer.data)
-#
-#     def test_get_rental_detail(self):
-#         rental = create_rental()
-#         url = rental_detail_url(rental.id)
-#         res = self.client.get(url)
-#
-#         serializer = RentalSerializer(rental)
-#         self.assertEqual(res.data, serializer.data)
 
 
 class ReservationAPITests(TestCase):
