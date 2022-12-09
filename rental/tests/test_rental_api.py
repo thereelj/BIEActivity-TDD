@@ -105,9 +105,6 @@ class ReservationAPITests(TestCase):
         self.assertEqual(res.data, reservation)
 
     def test_reservation_5(self):
-        psads = Reservation.objects.all()
-        for sd in psads:
-            print(sd)
         reservation_id = 5
         rental = 2
         checkin = '2022-01-11'
