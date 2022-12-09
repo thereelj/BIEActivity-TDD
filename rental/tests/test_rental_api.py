@@ -7,9 +7,9 @@ from core.models import (
 )
 
 
-def reservation_detail_url(rental, reservation_id):
+def reservation_detail_url(reservation_id):
 
-    return reverse('rental:reservation-detail', args=[rental, reservation_id])
+    return reverse('rental:reservation-detail', args=[reservation_id])
 
 
 def create_rental(**params):
@@ -49,7 +49,7 @@ class ReservationAPITests(TestCase):
             'Checkout': checkout,
             'Previous Reservation, ID': previous
         }
-        url = reservation_detail_url(rental, reservation_id)
+        url = reservation_detail_url(reservation_id)
         res = self.client.get(url)
         self.assertEqual(res.data, reservation)
 
@@ -66,7 +66,7 @@ class ReservationAPITests(TestCase):
             'Checkout': checkout,
             'Previous Reservation, ID': previous
         }
-        url = reservation_detail_url(rental, reservation_id)
+        url = reservation_detail_url(reservation_id)
         res = self.client.get(url)
         self.assertEqual(res.data, reservation)
 
@@ -83,7 +83,7 @@ class ReservationAPITests(TestCase):
             'Checkout': checkout,
             'Previous Reservation, ID': previous
         }
-        url = reservation_detail_url(rental, reservation_id)
+        url = reservation_detail_url(reservation_id)
         res = self.client.get(url)
         self.assertEqual(res.data, reservation)
 
@@ -100,7 +100,7 @@ class ReservationAPITests(TestCase):
             'Checkout': checkout,
             'Previous Reservation, ID': previous
         }
-        url = reservation_detail_url(rental, reservation_id)
+        url = reservation_detail_url(reservation_id)
         res = self.client.get(url)
         self.assertEqual(res.data, reservation)
 
@@ -118,7 +118,7 @@ class ReservationAPITests(TestCase):
             'Previous Reservation, ID': previous
         }
 
-        url = reservation_detail_url(rental, reservation_id)
+        url = reservation_detail_url(reservation_id)
         res = self.client.get(url)
         print(res.data)
         print(reservation)

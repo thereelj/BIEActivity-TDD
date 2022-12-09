@@ -63,8 +63,7 @@ class ReservationDetailAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'reservation_id'
 
     def get(self, request, *args, **kwargs):
-        obj = Reservation.objects.get(reservation_id=self.kwargs.get('reservation_id'),
-                                      rental=f"rental-{self.kwargs.get('rental_id')}")
+        obj = Reservation.objects.get(reservation_id=self.kwargs.get('reservation_id'))
         return Response(get_response_data(obj), status=status.HTTP_200_OK)
 
     def get_queryset(self):
